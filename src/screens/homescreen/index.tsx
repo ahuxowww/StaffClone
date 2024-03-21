@@ -1,11 +1,13 @@
+import i18n from '@src/assets/localization/i18n';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 
 const HomeScreen = () => {
+
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <ScrollView>
+      <Text>{i18n.t('menu.home')}</Text>
+    </ScrollView>
   );
 };
 

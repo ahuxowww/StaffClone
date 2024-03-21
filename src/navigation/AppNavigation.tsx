@@ -11,7 +11,6 @@ export default function AppNavigation() {
     <NavigationContainer>
       <Drawer.Navigator
         initialRouteName="Home"
-        defaultStatus="closed"
         screenOptions={{
           drawerType: 'back',
           drawerStyle: {width: '40%'},

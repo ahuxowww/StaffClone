@@ -1,0 +1,10 @@
+export {default as Home} from './svg/home.svg';
+export {default as Menu} from './svg/menu.svg';
+export {default as MenuRestaurant} from './svg/menu_restaurant.svg';
+export {default as Add} from './svg/add.svg';
+export {default as Notification} from './svg/notification.svg';
+export {default as Left} from './svg/left.svg';
+export {default as Right} from './svg/right.svg';
+export {default as Bottom} from './svg/bottom.svg';
+export {default as Top} from './svg/top.svg';
+export {default as Close} from './svg/close.svg';

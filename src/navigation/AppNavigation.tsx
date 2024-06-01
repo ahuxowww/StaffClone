@@ -14,9 +14,10 @@ import Animated, {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Pressable, StyleSheet} from 'react-native';
 import {View} from 'react-native-ui-lib';
-import {Svgs} from '@src/assets';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {Colors, Svgs} from '@src/assets';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import Container from '@src/assets/components/Container';
+import {SlicerBar} from '@src/assets/components/SliderBar';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,14 @@ const Screens = ({navigation}) => {
   });
   const [open, setopen] = React.useState(false);
 
+  const headerLeft = React.useCallback(() => {
+    return (
+      <Pressable onPress={openDrawer}>
+        <Svgs.Menu width={24} height={24} />
+      </Pressable>
+    );
+  }, []);
+
   const closeDrawer = React.useCallback(() => {
     navigation.closeDrawer();
     setopen(!open);
@@ -49,29 +58,17 @@ const Screens = ({navigation}) => {
     }
   }, [navigation, open]);
   return (
-    <Container backgroundColor={'#ffffff'} >
-      <View style={styles.containerHeader}>
-        {open === true ? (
-          <Pressable style={styles.button} onPress={closeDrawer}>
-            <Svgs.Close width={24} height={24} />
-          </Pressable>
-        ) : null}
-      </View>
+    <Container backgroundColor={Colors.greyDark}>
       <Animated.View style={[styles.shadowContainer, animatedStyle]}>
         <Stack.Navigator
           screenOptions={{
             headerTransparent: true,
-            title: '',
-            headerLeft: () => (
-              <Pressable onPress={openDrawer}>
-                <Svgs.Close width={24} height={24} />
-              </Pressable>
-            ),
-            headerRight: () => (
-              <Pressable onPress={openDrawer}>
-                <Svgs.Close width={24} height={24} />
-              </Pressable>
-            ),
+            title: 'Menu Marker',
+            headerTitleStyle: {
+              fontFamily: 'Roboto-Bold',
+              fontSize: 18,
+            },
+            headerLeft: headerLeft,
           }}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Detail" component={DetailScreen} />
@@ -94,11 +91,16 @@ export default function AppNavigation() {
           },
           overlayColor: 'transparent',
           drawerStyle: {
-            backgroundColor: '#2D3748',
+            backgroundColor: Colors.greyDark,
             flex: 1,
             width: '62%',
           },
-        }}>
+          headerTitleStyle: {
+            fontFamily: 'Roboto-Bold',
+            fontSize: 18,
+          },
+        }}
+        drawerContent={props => <SlicerBar {...props} />}>
         <Drawer.Screen name="Screens" options={{}}>
           {props => <Screens {...props} />}
         </Drawer.Screen>
@@ -110,7 +112,7 @@ export default function AppNavigation() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   button: {
     marginTop: 30,
